@@ -45,6 +45,12 @@
         "projectId": "99e3ed33-03de-458a-a3cd-c89e093c073a"
       }
     },
-    "owner": "yiruidupuy"
+    "owner": "yiruidupuy",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/99e3ed33-03de-458a-a3cd-c89e093c073a"
+    }
   }
 }

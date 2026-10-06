@@ -1,6 +1,8 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { UpdateButton } from '@/components/update-button';
+
 
 import { AnimatedIcon } from '@/components/animated-icon';
 import { HintRow } from '@/components/hint-row';
@@ -40,8 +42,13 @@ export default function HomeScreen() {
         </ThemedView>
 
         <ThemedText type="code" style={styles.code}>
-          get started
+          get started  
+          
+        
         </ThemedText>
+
+      
+
 
         <ThemedView type="backgroundElement" style={styles.stepContainer}>
           <HintRow
@@ -56,8 +63,11 @@ export default function HomeScreen() {
         </ThemedView>
 
         {Platform.OS === 'web' && <WebBadge />}
+
+        <UpdateButton/>
       </SafeAreaView>
     </ThemedView>
+    
   );
 }
 
@@ -66,6 +76,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     flexDirection: 'row',
+    backgroundColor:'yellow',
+    
   },
   safeArea: {
     flex: 1,
