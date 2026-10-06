@@ -1,5 +1,5 @@
 Version : ScrollView + map
-Montage : ... ms
-Cartes montées : ...
-RAM : ... Mo
-FPS UI / JS au plus bas : ... / ...
+Montage : 8482 ms
+Cartes montées : 5000...
+RAM : 1229.49... Mo
+FPS UI / JS au plus bas : 17... / .61..
