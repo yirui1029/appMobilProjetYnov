@@ -15,3 +15,10 @@ Montage : 260 ms
 Cartes montées : 5000...
 RAM : .. Mo
 FPS UI / JS au plus bas : 17... / .60.
+
+
+Version : FlatList
+Montage : 267 ms
+Cartes montées : 5000...
+RAM : 289.23 Mo
+FPS UI / JS au plus bas : 17... / 59

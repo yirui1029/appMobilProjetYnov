@@ -35,3 +35,4 @@ const styles = StyleSheet.create({
   title: { fontSize: 16, fontWeight: "600" },
   meta: { fontSize: 13, color: "#666" },
 });
+

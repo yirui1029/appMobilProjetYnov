@@ -1,9 +1,12 @@
-import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";
+import { FlashList } from "@shopify/flash-list";
+import { StyleSheet, Text, View } from "react-native";
+/*import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native";*/
 /*import { ScrollView, StyleSheet, Text, View } from "react-native";*/
 /*import { FlatList, StyleSheet, Text, View } from "react-native";*/
 import { usePerf } from "./perf";
 import { MemoRecipeCard } from "./RecipeCard";
-import { ALL_RECIPES, Recipe } from "./recipes-api";
+/*import { ALL_RECIPES, Recipe } from "./recipes-api";*/
+import { ALL_RECIPES } from "./recipes-api";
 
 /*export function RecipeList() {
   const mounted = usePerf("ScrollView + map");
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
 });*/
 
 // Définis hors du composant : les références restent identiques d'un rendu à l'autre
-const renderItem: ListRenderItem<Recipe> = ({ item }) => (
+/*const renderItem: ListRenderItem<Recipe> = ({ item }) => (
   <MemoRecipeCard recipe={item} />
 );
 const keyExtractor = (item: Recipe) => item.id;
@@ -60,14 +63,14 @@ export function RecipeList() {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         windowSize={21}
-       /* initialNumToRender={10}
+       initialNumToRender={10}
         maxToRenderPerBatch={10}
         getItemLayout={(_, index) => ({
     length: 180,
     offset: 180 * index,
     index,
   })}
-    removeClippedSubviews={false}*/
+    removeClippedSubviews={false}
         
       />
     </View>
@@ -76,4 +79,24 @@ export function RecipeList() {
 
 const styles = StyleSheet.create({
   counter: { padding: 8, textAlign: "center", fontWeight: "600" },
+});*/
+
+	export function RecipeList() {
+  const mounted = usePerf("FlashList");
+ 
+  return (
+    <View style={{ flex: 1 }}>
+      <Text style={styles.counter}>Cartes montées : {mounted}</Text>
+      <FlashList
+        data={ALL_RECIPES}
+        renderItem={({ item }) => <MemoRecipeCard recipe={item} />}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  );
+}
+ 
+const styles = StyleSheet.create({
+  counter: { padding: 8, textAlign: "center", fontWeight: "600" },
 });
+
