@@ -22,3 +22,9 @@ Montage : 267 ms
 Cartes montées : 5000...
 RAM : 289.23 Mo
 FPS UI / JS au plus bas : 17... / 59
+
+Version : FlashList paginée
+Montage : 240059 ms
+Cartes montées : 3000...
+RAM : 323.56 Mo
+FPS UI / JS au plus bas : 17... / 59
