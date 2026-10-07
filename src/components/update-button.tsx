@@ -1,10 +1,10 @@
-import * as Updates from 'expo-updates';
-import { useState } from 'react';
-import { Alert, Pressable, StyleSheet } from 'react-native';
+import * as Updates from "expo-updates";
+import { useState } from "react";
+import { Alert, Pressable, StyleSheet } from "react-native";
 
-import { Spacing } from '@/constants/theme';
-import { ThemedText } from './themed-text';
-import { ThemedView } from './themed-view';
+import { Spacing } from "@/constants/theme";
+import { ThemedText } from "./themed-text";
+import { ThemedView } from "./themed-view";
 
 export function UpdateButton() {
   const [isChecking, setIsChecking] = useState(false);
@@ -19,18 +19,15 @@ export function UpdateButton() {
         await Updates.fetchUpdateAsync();
         await Updates.reloadAsync();
       } else {
-        Alert.alert(
-          'Application à jour',
-          'Aucune mise à jour disponible.'
-        );
+        Alert.alert("Application à jour", "Aucune mise à jour disponible.");
       }
     } catch (error) {
       const message =
         error instanceof Error
           ? error.message
-          : 'Une erreur inconnue est survenue.';
+          : "Une erreur inconnue est survenue.";
 
-      Alert.alert('Mise à jour impossible', message);
+      Alert.alert("Mise à jour impossible", message);
     } finally {
       setIsChecking(false);
     }
@@ -46,19 +43,11 @@ export function UpdateButton() {
       }}
       disabled={isChecking}
       onPress={onCheckUpdates}
-      style={({ pressed }) => [
-        styles.pressable,
-        pressed && styles.pressed,
-      ]}
+      style={({ pressed }) => [styles.pressable, pressed && styles.pressed]}
     >
-      <ThemedView
-        type="backgroundElement"
-        style={styles.button}
-      >
+      <ThemedView type="backgroundElement" style={styles.button}>
         <ThemedText type="smallBold">
-          {isChecking
-            ? 'Recherche en cours…'
-            : 'Rechercher les mises à jour'}
+          {isChecking ? "Recherche en cours…" : "Rechercher les mises à jour"}
         </ThemedText>
       </ThemedView>
     </Pressable>
@@ -67,7 +56,7 @@ export function UpdateButton() {
 
 const styles = StyleSheet.create({
   pressable: {
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
   },
 
   pressed: {
@@ -75,7 +64,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: Spacing.three,
     paddingHorizontal: Spacing.four,
     paddingVertical: Spacing.three,

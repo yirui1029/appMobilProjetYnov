@@ -1,18 +1,21 @@
-	export type Recipe = {
+export type Recipe = {
   id: string;
   title: string;
   minutes: number;
 };
- 
+
 export const TOTAL_RECIPES = 5000;
 const PAGE_SIZE = 30;
- 
-export const ALL_RECIPES: Recipe[] = Array.from({ length: TOTAL_RECIPES }, (_, i) => ({
-  id: `recipe-${i}`,
-  title: `Recette n°${i + 1}`,
-  minutes: 10 + (i % 80),
-}));
- 
+
+export const ALL_RECIPES: Recipe[] = Array.from(
+  { length: TOTAL_RECIPES },
+  (_, i) => ({
+    id: `recipe-${i}`,
+    title: `Recette n°${i + 1}`,
+    minutes: 10 + (i % 80),
+  }),
+);
+
 /** Fausse API paginée, avec 600 ms de latence */
 export async function fetchRecipes(page: number) {
   await new Promise((resolve) => setTimeout(resolve, 600));
