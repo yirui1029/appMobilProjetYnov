@@ -1,6 +1,6 @@
 	// src/app/lieu/[id].tsx
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { Stack, useLocalSearchParams, useRouter,  useFocusEffect} from "expo-router";
+import { useState, useEffect, useCallback} from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
  
 import { getLieu } from "@/data/lieux";
@@ -11,6 +11,14 @@ export default function LieuScreen() {
   const router = useRouter();
   const [compteur, setCompteur] = useState(0);
   useLifecycleLog(`Lieu ${id}`);
+
+  	  // Le timer ne tourne que lorsque l'écran est au premier plan
+  useFocusEffect(
+    useCallback(() => {
+      const id = setInterval(() => console.log("tick"), 1000);
+      return () => clearInterval(id);
+    }, []),
+  );
  
   const lieu = getLieu(id);
   if (!lieu) {
