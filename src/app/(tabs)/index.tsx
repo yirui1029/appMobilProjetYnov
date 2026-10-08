@@ -1,77 +1,48 @@
-import * as Device from "expo-device";
-import { Platform, StyleSheet } from "react-native";
+// src/app/(tabs)/index.tsx
+import { Link, useLocalSearchParams } from "expo-router";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { UpdateButton } from "@/components/update-button";
-import { RecipeList } from "@/components/recipes/RecipeList";
-
-import { AnimatedIcon } from "@/components/animated-icon";
-import { HintRow } from "@/components/hint-row";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { WebBadge } from "@/components/web-badge";
-import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
-import { Component } from "react";
-
-function getDevMenuHint() {
-  if (Platform.OS === "web") {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === "android" ? "cmd+m (or ctrl+m)" : "cmd+d";
+ 
+import { LIEUX } from "@/data/lieux";
+import { useLifecycleLog } from "@/hooks/use-lifecycle-log";
+ 
+export default function LieuxScreen() {
+  useLifecycleLog("Accueil");
+  const { ville } = useLocalSearchParams<{ ville?: string }>();
+  const lieux = ville ? LIEUX.filter((lieu) => lieu.ville === ville) : LIEUX;
+ 
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
-
-export default function HomeScreen() {
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      <RecipeList />
+    <SafeAreaView style={styles.container} edges={["top"]}>
+      <View style={styles.header}>
+        <Text style={styles.title}>{ville ? ville : "Tous les lieux"}</Text>
+        <Link href="/filtre" style={styles.filter}>
+          Filtrer
+        </Link>
+      </View>
+      <FlatList
+        data={lieux}
+        keyExtractor={(lieu) => lieu.id}
+        renderItem={({ item }) => (
+          <Link href={{ pathname: "/lieu/[id]", params: { id: item.id } }} asChild>
+            <Pressable style={styles.row}>
+              <Text style={styles.name}>{item.nom}</Text>
+              <Text style={styles.meta}>
+                {item.type} · {item.ville}
+              </Text>
+            </Pressable>
+          </Link>
+        )}
+      />
     </SafeAreaView>
   );
 }
-
+ 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    flexDirection: "row",
-    backgroundColor: "yellow",
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: "center",
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: "center",
-  },
-  code: {
-    textTransform: "uppercase",
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: "stretch",
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
+  container: { flex: 1 },
+  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16 },
+  title: { fontSize: 22, fontWeight: "700" },
+  filter: { fontSize: 16, color: "#208AEF" },
+  row: { padding: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: "#ccc" },
+  name: { fontSize: 16, fontWeight: "600" },
+  meta: { fontSize: 13, color: "#666", marginTop: 2 },
 });

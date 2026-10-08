@@ -15,7 +15,7 @@ export default function RootLayout() {
       <AnimatedSplashOverlay />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="lieu/[id]" options={{ title: "Lieu" }} />
+        <Stack.Screen name="lieu/[id]" options={{ title: "Lieu"}} />
         <Stack.Screen name="filtre" options={{ presentation: "modal", title: "Filtrer" }} />
       </Stack>
     </ThemeProvider>
