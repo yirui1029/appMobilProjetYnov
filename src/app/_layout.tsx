@@ -6,6 +6,10 @@ import { useColorScheme } from "react-native";
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
  
 SplashScreen.preventAutoHideAsync();
+
+export const unstable_settings = {
+  anchor: "(tabs)",
+};
  
 export default function RootLayout() {
   const colorScheme = useColorScheme();

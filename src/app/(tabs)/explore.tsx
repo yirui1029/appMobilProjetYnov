@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useLifecycleLog } from "@/hooks/use-lifecycle-log";
  
 // Remplacer "tpexpo" par le scheme de votre app.json
-const SCHEME = "tpexpo";
+const SCHEME = "monapp";
  
 export default function LiensScreen() {
   useLifecycleLog("Liens");
